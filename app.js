@@ -9,7 +9,11 @@ const app = express();
 //init Handlebars enginge and custom layout-"{layoutsDir}"
 app.engine(
   "hbs",
-  expressHbs({ layoutsDir: "views/layouts/", defaultLayout: "main-layout.hbs" })
+  expressHbs({
+    layoutsDir: "views/layouts/",
+    defaultLayout: "main-layout",
+    extname: "hbs",
+  })
 );
 
 //Init Pug engine
