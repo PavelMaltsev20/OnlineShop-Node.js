@@ -1,3 +1,8 @@
+/*
+  Example file. 
+  It's not used in current project
+*/
+
 const fs = require("fs");
 
 const requestHandler = (req, res) => {
