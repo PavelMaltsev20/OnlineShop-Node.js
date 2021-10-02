@@ -5,8 +5,10 @@ const express = require("express");
 //Enter point of app
 const app = express();
 
-//Init body Parser and path for entire app
+app.set("view engine", "pug");
+app.set("views", "views");
 
+//Init body Parser and path for entire app
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
