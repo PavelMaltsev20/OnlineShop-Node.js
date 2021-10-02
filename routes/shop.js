@@ -3,7 +3,12 @@ const router = express.Router();
 const admin = require("./admin.js");
 
 router.get("/", (req, res, next) => {
-  res.render("shop", { pageTitle: "Shop", products: admin.products });
+  const products = admin.products;
+  res.render("shop", {
+    pageTitle: "Shop",
+    hasProducts: products.length > 0,
+    products: products,
+  });
 });
 
 module.exports = router;

@@ -1,12 +1,19 @@
 //import
 const path = require("path");
 const express = require("express");
+const expressHbs = require("express-handlebars");
 
 //Enter point of app
 const app = express();
 
-app.set("view engine", "pug");
+//init Handlebars enginge
+app.engine("hbs", expressHbs());
+
+//Init Pug engine
 app.set("views", "views");
+
+//Connect enginge to project
+app.set("view engine", "hbs");
 
 //Init body Parser and path for entire app
 app.use(express.urlencoded({ extended: true }));
