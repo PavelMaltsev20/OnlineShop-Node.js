@@ -6,8 +6,11 @@ const expressHbs = require("express-handlebars");
 //Enter point of app
 const app = express();
 
-//init Handlebars enginge
-app.engine("hbs", expressHbs());
+//init Handlebars enginge and custom layout-"{layoutsDir}"
+app.engine(
+  "hbs",
+  expressHbs({ layoutsDir: "views/layouts/", defaultLayout: "main-layout.hbs" })
+);
 
 //Init Pug engine
 app.set("views", "views");
