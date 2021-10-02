@@ -20,7 +20,7 @@ const shop = require("./routes/shop");
 app.use(shop);
 
 app.use((req, res, next) => {
-  res.status(404).render("404");
+  res.status(404).render("404", { pageTitle: "404" });
 });
 
 //Creating server
