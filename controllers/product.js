@@ -12,8 +12,7 @@ const addProductPost = (req, res, next) => {
 
 const shopPage = (req, res, next) => {
   Product.fetchAll((products) => {
-    console.log("from module " + products.length);
-    res.render("shop", {
+    res.render("shop/products-list.pug", {
       pageTitle: "Shop",
       products: products,
     });

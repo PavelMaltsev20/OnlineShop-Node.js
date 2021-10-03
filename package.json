@@ -18,5 +18,13 @@
     "express": "^4.17.1",
     "express-handlebars": "3.0",
     "pug": "^3.0.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PavelMaltsev20/Shop-Node.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PavelMaltsev20/Shop-Node.js/issues"
+  },
+  "homepage": "https://github.com/PavelMaltsev20/Shop-Node.js#readme"
 }
