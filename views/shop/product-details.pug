@@ -1,0 +1,9 @@
+extends ../layouts/main-layouts.pug 
+include ../mixins/buttons.pug
+
+block content 
+    h1 #{product.title}
+    img(src=product.imageUrl, alt="https://i.stack.imgur.com/y9DpT.jpg")
+    h2 #{product.price}
+    h2 #{product.desc}
+        +addtoCartBtn(product.id)

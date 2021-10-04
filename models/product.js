@@ -1,27 +1,7 @@
 //imports
-const fs = require("fs");
-const path = require("path");
-const rootDir = require("../utils/path");
+const fileReader = require("./fileReader");
 const productsList = [];
-
-/*
-    path.join paremeters:
-    1 rootDir - root project folder
-    2 data - path to scpecific folder
-    3 products.json - name of file
-*/
-const p = path.join(rootDir, "data", "products.json");
-
-const fetchDataFromFile = (callback) => {
-  fs.readFile(p, (err, content) => {
-    if (err) {
-      console.log("product.js, fetchDataFromFile, l:18 :: " + err);
-      callback([]);
-    } else {
-      callback(JSON.parse(content));
-    }
-  });
-};
+const fileName = "products.json";
 
 module.exports = class Product {
   constructor(title, imageUrl, price, desc) {
@@ -32,26 +12,46 @@ module.exports = class Product {
     this.desc = desc;
   }
 
-  static fetchAll(callback) {
-    fetchDataFromFile(callback);
-  }
-
   save() {
-    fetchDataFromFile((products) => {
+    fileReader.readFromFile(fileName, (products) => {
       products.push(this);
-      //p - file storage, JSON.stringify(products) - data, (err) - error
-      fs.writeFile(p, JSON.stringify(products), (err) => {
-        if (err) {
-          console.log(err);
-        }
-      });
+
+      fileReader.saveToFile(fileName, products);
     });
   }
 
-  getById(productId, callback) {
-    fetchDataFromFile((products) => {
+  updateProduct() {
+    fileReader.readFromFile(fileName, (products) => {
+      const updatedArray = products.map((item) => {
+        console.log(item.id);
+        console.log(this.id);
+
+        if (item.id === this.id) {
+          console.log(this);
+          return this;
+        } else {
+          return item;
+        }
+      });
+
+      console.log(updatedArray);
+
+      fileReader.saveToFile(fileName, updatedArray);
+    });
+  }
+
+  static fetchAll(callback) {
+    fileReader.readFromFile(fileName, callback);
+  }
+
+  static getById(productId, callback) {
+    fileReader.readFromFile(fileName, (products) => {
       const product = products.find((current) => current.id === productId);
       callback(product);
     });
+  }
+
+  setId(id){
+    this.id = id;
   }
 };
