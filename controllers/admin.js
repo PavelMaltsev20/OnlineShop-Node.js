@@ -13,7 +13,7 @@ exports.addProductPost = (req, res, next) => {
   const price = +req.body.price;
   const desc = req.body.desc;
   const newProduct = new Product(title, imageUrl, price, desc);
-  newProduct.save();
+  newProduct.saveNewProduct();
   res.redirect("/");
 };
 
@@ -38,11 +38,10 @@ exports.editProductPage = (req, res, next) => {
 
 exports.updateProduct = (req, res, next) => {
   const product = new Product();
-  product.setId(req.body.idForUpdate);
   product.title = req.body.title;
   product.imageUrl = req.body.imageUrl;
   product.price = +req.body.price;
   product.desc = req.body.desc;
-  product.updateProduct();
+  product.updateProductWithId(req.body.idForUpdate);
   res.redirect("/admin/products");
 };

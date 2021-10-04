@@ -12,7 +12,7 @@ module.exports = class Product {
     this.desc = desc;
   }
 
-  save() {
+  saveNewProduct() {
     fileReader.readFromFile(fileName, (products) => {
       products.push(this);
 
@@ -20,22 +20,16 @@ module.exports = class Product {
     });
   }
 
-  updateProduct() {
+  updateProductWithId(id) {
+    this.id = id;
     fileReader.readFromFile(fileName, (products) => {
       const updatedArray = products.map((item) => {
-        console.log(item.id);
-        console.log(this.id);
-
         if (item.id === this.id) {
-          console.log(this);
           return this;
         } else {
           return item;
         }
       });
-
-      console.log(updatedArray);
-
       fileReader.saveToFile(fileName, updatedArray);
     });
   }
@@ -49,9 +43,5 @@ module.exports = class Product {
       const product = products.find((current) => current.id === productId);
       callback(product);
     });
-  }
-
-  setId(id){
-    this.id = id;
   }
 };
