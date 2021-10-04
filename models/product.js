@@ -24,8 +24,12 @@ const fetchDataFromFile = (callback) => {
 };
 
 module.exports = class Product {
-  constructor(t) {
-    this.title = t;
+  constructor(title, imageUrl, price, desc) {
+    this.id = Math.random().toString();
+    this.title = title;
+    this.imageUrl = imageUrl;
+    this.price = price;
+    this.desc = desc;
   }
 
   static fetchAll(callback) {
@@ -41,6 +45,13 @@ module.exports = class Product {
           console.log(err);
         }
       });
+    });
+  }
+
+  getById(productId, callback) {
+    fetchDataFromFile((products) => {
+      const product = products.find((current) => current.id === productId);
+      callback(product);
     });
   }
 };
