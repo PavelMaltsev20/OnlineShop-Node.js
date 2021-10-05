@@ -6,6 +6,7 @@ block styles
 
 block content
     main 
+        h2 Total: #{total}
         if products.length > 0 
             +listOfItems(products)
         else 

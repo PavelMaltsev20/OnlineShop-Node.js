@@ -6,16 +6,16 @@ const fileReader = require("./fileReader");
 const fileName = "cart.json";
 
 module.exports = class Cart {
-  constructor(productId) {
-    this.productId = productId;
-    this.quantity = 1;
+  constructor(id, quantity = 1) {
+    this.id = id;
+    this.quantity = quantity;
   }
 
   addToCart() {
     fileReader.readFromFile(fileName, (cart) => {
-      if (cart.find((item) => item.productId === this.productId)) {
+      if (cart.find((item) => item.id === this.id)) {
         cart.map((item) => {
-          if (item.productId === this.productId) {
+          if (item.id === this.id) {
             item.quantity += 1;
             return item;
           } else {
@@ -30,28 +30,17 @@ module.exports = class Cart {
   }
 
   /**
-   * The function reads data
-   * from two files (cart.json and products.json) and compares ids.
-   * If they match then an object (Product object)
-   * with this id is add to the list (result list)
-   *
-   * @param callback return result that contains Products objects
+   * @param callback return cart objects
    */
   static getCartProducts(callback) {
     fileReader.readFromFile(fileName, (cart) => {
-      const cartIdList = cart.map((item) => item.productId);
-      fileReader.readFromFile("products.json", (products) => {
-        const result = products.filter((product) =>
-          cartIdList.includes(product.id)
-        );
-        callback(result);
-      });
+      callback(cart);
     });
   }
 
   static deleteById(id) {
     fileReader.readFromFile(fileName, (cart) => {
-      const result = cart.filter((current) => current.productId !== id);
+      const result = cart.filter((current) => current.id !== id);
       fileReader.saveToFile(fileName, result);
     });
   }

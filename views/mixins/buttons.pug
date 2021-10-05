@@ -13,7 +13,12 @@ mixin editBtn(productId)
         button(class="btn", type="submit") Edit
         input(type="hidden" name="productId" value=productId)
 
-mixin deleteBtn(productId)
+mixin deleteInAdmin(productId)
     form(action=`/admin/delete/${productId}` method="POST") 
+        button(class="btn", type="submit") Delete
+        input(type="hidden" name="productId" value=productId)
+
+mixin deleteInCart(productId)
+    form(action=`/cart/delete/${productId}` method="POST") 
         button(class="btn", type="submit") Delete
         input(type="hidden" name="productId" value=productId)

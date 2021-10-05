@@ -19,6 +19,6 @@ block content
                             p.product_description #{item.desc}
                         .card__actions 
                             +editBtn(item.id)  
-                            +deleteBtn(item.id)
+                            +deleteInAdmin(item.id)
         else 
             h3 No products 

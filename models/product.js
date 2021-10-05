@@ -1,5 +1,5 @@
 //imports
-const Cart = require("./cart")
+const Cart = require("./cart");
 const fileReader = require("./fileReader");
 const productsList = [];
 const fileName = "products.json";
@@ -47,10 +47,35 @@ module.exports = class Product {
     fileReader.readFromFile(fileName, callback);
   }
 
+  /**
+   * Function find the required object by ID
+   *
+   * @param productId gets id of string format to find the desired object
+   * @param callback returns the found object can take the value of null
+   */
   static getById(productId, callback) {
     fileReader.readFromFile(fileName, (products) => {
       const product = products.find((current) => current.id === productId);
       callback(product);
     });
+  }
+
+  static async getCartProductDetails(cart, callback) {
+    const result = [];
+    const total = 0;
+    for (const item of cart) {
+      await new Promise((res, rej) => {
+        this.getById(item.id, (product) => {
+          if (product !== null) {
+            result.push([product, item.quantity]);
+            res();
+          } else {
+            rej("Products.js: Failded to recieve product l:73");
+          }
+        });
+      });
+    }
+
+    callback(result, total);
   }
 };
