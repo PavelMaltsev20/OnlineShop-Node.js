@@ -14,6 +14,6 @@ mixin editBtn(productId)
         input(type="hidden" name="productId" value=productId)
 
 mixin deleteBtn(productId)
-    form(action="/cart" method="POST") 
+    form(action=`/admin/delete/${productId}` method="POST") 
         button(class="btn", type="submit") Delete
         input(type="hidden" name="productId" value=productId)

@@ -34,6 +34,18 @@ module.exports = class Product {
     });
   }
 
+  static deleteProduct(id) {
+    fileReader.readFromFile(fileName, (products) => {
+      for (const index in products) {
+        if (products[index].id === id) {
+          products.splice(index, 1);
+        }
+      }
+
+      fileReader.saveToFile(fileName, products);
+    });
+  }
+
   static fetchAll(callback) {
     fileReader.readFromFile(fileName, callback);
   }

@@ -19,7 +19,6 @@ block content
                             p.product_description #{item.desc}
                         .card__actions 
                             +editBtn(item.id)  
-                            form(action="/delete-product" method="POST") 
-                                button.btn Delete
+                            +deleteBtn(item.id)
         else 
             h3 No products 

@@ -1,7 +1,6 @@
 const Product = require("../models/product");
 
 exports.newProductPage = (req, res, next) => {
-  console.log("entered");
   res.render("admin/add-product.pug", {
     pageTitle: "Add product",
   });
@@ -42,6 +41,12 @@ exports.updateProduct = (req, res, next) => {
   product.imageUrl = req.body.imageUrl;
   product.price = +req.body.price;
   product.desc = req.body.desc;
-  product.updateProductWithId(req.body.idForUpdate);
+  product.updateProductWithId(req.body.productId);
+  res.redirect("/admin/products");
+};
+
+exports.deleteProduct = (req, res, next) => {
+  const productId = req.body.productId;
+  Product.deleteProduct(productId);
   res.redirect("/admin/products");
 };
