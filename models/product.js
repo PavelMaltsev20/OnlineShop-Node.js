@@ -62,11 +62,12 @@ module.exports = class Product {
 
   static async getCartProductDetails(cart, callback) {
     const result = [];
-    const total = 0;
+    var total = 0;
     for (const item of cart) {
       await new Promise((res, rej) => {
         this.getById(item.id, (product) => {
           if (product !== null) {
+            total = total + product.price * item.quantity;
             result.push([product, item.quantity]);
             res();
           } else {

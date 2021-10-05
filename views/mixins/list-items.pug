@@ -5,12 +5,12 @@ mixin listOfItems(products)
         each item in products 
             article.card.product-item 
                 header.card__header 
-                    h1.product__title #{item.title}
+                    h1.product__title #{item[0].title}
                 .card__image 
-                    img(src= `${item.imageUrl}`)
+                    img(src= `${item[0].imageUrl}`)
                 .card__content 
-                    h2.product__price $#{item.price}
-                    p.product_description #{item.desc}
+                    h2.product__price $#{item[0].price} x #{item[1]}
+                    p.product_description #{item[0].desc}
                 .card__actions
-                    +deleteInCart(item.id) 
+                    +deleteInCart(item[0].id) 
                         
