@@ -1,4 +1,5 @@
 //imports
+const Cart = require("./cart")
 const fileReader = require("./fileReader");
 const productsList = [];
 const fileName = "products.json";
@@ -34,15 +35,11 @@ module.exports = class Product {
     });
   }
 
-  static deleteProduct(id) {
+  static deleteById(id) {
     fileReader.readFromFile(fileName, (products) => {
-      for (const index in products) {
-        if (products[index].id === id) {
-          products.splice(index, 1);
-        }
-      }
-
-      fileReader.saveToFile(fileName, products);
+      const result = products.filter((item) => item.id !== id);
+      fileReader.saveToFile(fileName, result);
+      Cart.deleteById(id);
     });
   }
 

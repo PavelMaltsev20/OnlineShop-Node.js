@@ -1,1 +1,12 @@
 extends ../layouts/main-layouts.pug 
+include ../mixins/item-list.pug
+ 
+block styles
+    link(rel="stylesheet", href="/css/forms.css")
+
+block content
+    main 
+        if products.length > 0 
+            +listOfItems(products)
+        else 
+            h3 There are no items in your cart. 
