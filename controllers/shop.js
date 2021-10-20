@@ -2,21 +2,31 @@ const Product = require("../models/product");
 const Cart = require("../models/cart");
 
 exports.shopPage = (req, res, next) => {
-  Product.fetchAll((products) => {
-    res.render("shop/products-list.pug", {
-      pageTitle: "Shop",
-      products: products,
-    });
-  });
+//   Product.fetchAll().then((rows, fieldData) => {
+//     console.log(rows);
+
+// //     res.render("shop/index.pug", {
+// //     pageTitle: "Shop index",
+// //     products: rows,
+// //  });
+// }).catch((err) => {
+//   console.log("Shop.js, indexPage error: "+err);
+// })
 };
 
+
+//TODO SOME ERROR HERE
 exports.indexPage = (req, res, next) => {
-  Product.fetchAll((products) => {
-    res.render("shop/index.pug", {
-      pageTitle: "Shop index",
-      products: products,
-    });
-  });
+  // Product.fetchAll().then((rows, fieldData) => {
+  
+  //     res.render("shop/index.pug", {
+  //     pageTitle: "Shop index",
+  //     products: rows,
+  
+  // });
+  // }).catch((err) => {
+  //   console.log("Shop.js, indexPage error: "+err);
+  // })
 };
 
 exports.cartPage = (req, res, next) => {

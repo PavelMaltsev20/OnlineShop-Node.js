@@ -4,6 +4,7 @@ const express = require("express");
 const errorController = require("./controllers/error");
 // Handlebats engine
 const expressHbs = require("express-handlebars");
+const db = require("./utils/database")
 
 //Enter point of app
 const app = express();
@@ -33,6 +34,13 @@ app.set("view engine", ejsEngine);
 //Init body Parser and path for entire app
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+
+
+db.execute("SELECT * FROM products").then((result) => {
+  console.log( result[0]);
+}).catch((err) => {
+  console.log("MySql database error: "+err);
+});
 
 // Init web pages
 const admin = require("./routes/admin");
